@@ -138,7 +138,6 @@ services.upower.enable= true;
      kodi-wayland
      grim
      slurp
-     wofi
      feh
      wf-recorder
      pamixer
