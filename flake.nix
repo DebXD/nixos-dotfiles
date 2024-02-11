@@ -14,7 +14,7 @@
       nixosConfigurations = {
         debxd-tux = lib.nixosSystem {
           inherit system;
-          modules = [ ./configuration.nix];
+          modules = [ ./configuration.nix ./nvidia.nix];
         };
         };
         homeConfigurations = {

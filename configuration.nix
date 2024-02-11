@@ -6,7 +6,9 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+     ./hardware-configuration.nix
+      #Nvidia
+      ./nvidia.nix
     ]; # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
   #boot.loader.efi.canTouchEfiVariables = true;
@@ -23,7 +25,7 @@ nixpkgs.config.allowUnfree = true;
   };
    networking.hostName = "debxd-tux"; # Define your hostname.
 # Set Wireguard config here
-    networking.wg-quick.interfaces.wg0.configFile = "/home/debxd/Downloads/wg0.conf";
+    #networking.wg-quick.interfaces.wg0.configFile = "/home/debxd/Downloads/wg0.conf";
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -151,9 +153,13 @@ services.upower.enable= true;
      swayidle
      yt-dlp
      lazygit
+     clipman
+     nvtop
+     lshw
      ];
 
-
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
       #virtmanager
       virtualisation.libvirtd.enable = true;
       programs.virt-manager.enable = true;
