@@ -22,6 +22,8 @@ nixpkgs.config.allowUnfree = true;
   configurationLimit = 5;
   };
    networking.hostName = "debxd-tux"; # Define your hostname.
+# Set Wireguard config here
+    networking.wg-quick.interfaces.wg0.configFile = "/home/debxd/Downloads/wg0.conf";
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -47,7 +49,6 @@ nixpkgs.config.allowUnfree = true;
    #services.xserver.displayManager.gdm.wayland = true;
    #services.greetd.enable = true;
 services.upower.enable= true;
-
   # Enable Display Manager
   services.greetd = {
     enable = true;
@@ -80,7 +81,7 @@ services.upower.enable= true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.debxd = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" "storage" "power" ]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" "networkmanager" "storage" "power" "libvirtd" ]; # Enable ‘sudo’ for the user.
     # packages = with pkgs; [
   #     firefox
   #     tree
@@ -143,10 +144,21 @@ services.upower.enable= true;
      pamixer
      swaynotificationcenter
      pavucontrol
+     motrix
+     wireguard-tools
+     foot
+     alacritty
+     swayidle
+     yt-dlp
+     lazygit
      ];
 
+
+      #virtmanager
+      virtualisation.libvirtd.enable = true;
+      programs.virt-manager.enable = true;
      #starship
-programs.starship = { enable = true;
+      programs.starship = { enable = true;
        settings = {
          add_newline = true;
          character = {
