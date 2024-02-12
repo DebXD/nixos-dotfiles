@@ -8,7 +8,7 @@
     [ # Include the results of the hardware scan.
      ./hardware-configuration.nix
       #Nvidia
-      ./nvidia.nix
+      ./system/nvidia.nix
     ]; # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
   #boot.loader.efi.canTouchEfiVariables = true;
@@ -160,6 +160,9 @@ services.upower.enable= true;
      ctpv
      lutris
      ytfzf
+     gamemode
+     protonup-qt
+     jdk17
      ];
 #steam
 programs.steam = {

@@ -1,8 +1,11 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
+  imports = [
+  ./user/hyprland.nix
+  ];
   home.username = "debxd";
   home.homeDirectory = "/home/debxd";
   home.enableNixpkgsReleaseCheck = false;
@@ -16,19 +19,51 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
-  gtk.enable = true;
-  # home.file = {
-  #   ".icons/cursors".source = "${pkgs.capitaine-cursors-themed}/share/icons/capitaine-cursors-themed";
-  # };
-  #gtk.cursorTheme.package = pkgs.capitaine-cursors-themed;
-  #gtk.cursorTheme.name =  "Capitaine Cursors (Gruvbox)";
-  #x11.pointerCursor.package = pkgs
-  home.pointerCursor = {
-    name = "Capitaine Cursors (Gruvbox)";
-    package = pkgs.capitaine-cursors-themed;
-    gtk.enable = true;
-    x11.enable = true;
-};
+
+  #hyprland
+        gtk = {
+            enable = true;
+            iconTheme = {
+                name = "gruvBox";
+                package = pkgs.papirus-icon-theme;
+            };
+            cursorTheme = {
+                name = "Bibata-Modern-Ice";
+                package = pkgs.bibata-cursors;
+                size = 24;
+            };
+            theme = {
+                name = "Matcha-dark-pueril";
+                package = pkgs.matcha-gtk-theme.override {
+                    colorVariants = ["dark"];
+                    themeVariants = ["pueril"];
+                };
+            };
+            gtk3.extraConfig = {
+                Settings = ''
+                    gtk-application-prefer-dark-theme=1
+                    '';
+            };
+            gtk4.extraConfig = {
+                Settings = ''
+                    gtk-application-prefer-dark-theme=1
+                    '';
+            };
+        };
+    qt = {
+            enable = true;
+            platformTheme = "gtk";
+            style.name = "gtk2";
+        };
+
+
+
+  #home.pointerCursor = {
+  #  name = "Capitaine Cursors (Gruvbox)";
+  #  package = pkgs.capitaine-cursors-themed;
+  #  gtk.enable = true;
+  #  x11.enable = true;
+#};
   # home.pointerCursor =
   #   let
   #     getFrom = url: hash: name: {
@@ -50,8 +85,6 @@
   #       "https://github.com/sainnhe/capitaine-cursors/releases/download/r5/Linux.zip"
   #       "sha256-YBFM+FeQKpkHeAvc+pldYAYYzxSzf5B3ZWXJ3n5a3Ww="
   #       "Capitaine Cursors (Gruvbox)";
-  gtk.theme.package = pkgs.adw-gtk3;
-  gtk.theme.name = "adw-gtk3";
 
   #gtk.cursorTheme.package = pkgs.capitaine-cursors-themed;
   #gtk.cursorTheme.name = "Gruvbox";
