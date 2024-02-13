@@ -163,6 +163,7 @@ services.upower.enable= true;
      gamemode
      protonup-qt
      jdk17
+     networkmanagerapplet
      ];
 #steam
 programs.steam = {
@@ -205,6 +206,7 @@ programs.steam = {
    programs.hyprland = {
    enable = true;
    xwayland.enable = true;
+   enableNvidiaPatches = true;
    };
 
 

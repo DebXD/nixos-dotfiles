@@ -5,6 +5,7 @@
   # manage.
   imports = [
   ./user/hyprland.nix
+  ./user/hyprpaper.nix
   ];
   home.username = "debxd";
   home.homeDirectory = "/home/debxd";

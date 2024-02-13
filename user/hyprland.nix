@@ -8,14 +8,21 @@
     plugins = [ ];
     settings = { };
     extraConfig = ''
-    monitor=eDP-1,1920x1080,auto,1
+# See https://wiki.hyprland.org/Configuring/Monitors/
+monitor=eDP-1,1920x1080,auto,1
+# See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
-exec-once = waybar & hyprpaper & swaync
+# Execute your favorite apps at launch
+exec-once = waybar & hyprpaper & swaync & nm-applet
 exec-once = wl-paste -t text --watch clipman store --no-persist
 exec-once = swayidle -w timeout 600 'swaylock -f' timeout 660 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
 
+
+
+# Some default env vars.
 env = XCURSOR_SIZE,24
 
+# For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 input {
   kb_layout = us
     kb_variant =
@@ -38,18 +45,12 @@ input {
 
 general {
   gaps_in = 10
-  #gaps_out = 10
     border_size = 3
     col.active_border = rgb(89B482) rgb(A9B665) 45deg
     col.inactive_border = rgb(282828)
-    #col.active_border = rgba(e5b9c6ff) rgba(c293a3ff) 45deg
-    #col.inactive_border = 0xff382D2E
     no_border_on_floating = false # enable border on float window
     layout = dwindle
     no_cursor_warps = true
-    # cursor_inactive_timeout = 0
-    # no_focus_fallback = false
-    # resize_on_border = false
 }
 
 
@@ -79,7 +80,6 @@ decoration {
 # █▀█ █▀█ █░█ █▄░█ █▀▄   █▀▀ █▀█ █▀█ █▄░█ █▀▀ █▀█
 # █▀▄ █▄█ █▄█ █░▀█ █▄▀   █▄▄ █▄█ █▀▄ █░▀█ ██▄ █▀▄
   rounding = 10
-  #multisample_edges = true
 
 # █▀█ █▀█ ▄▀█ █▀▀ █ ▀█▀ █▄█
 # █▄█ █▀▀ █▀█ █▄▄ █ ░█░ ░█░
@@ -99,12 +99,11 @@ decoration {
     }
 # █▀ █░█ ▄▀█ █▀▄ █▀█ █░█░█
 # ▄█ █▀█ █▀█ █▄▀ █▄█ ▀▄▀▄▀
-#drop_shadow = false
-#shadow_ignore_window = true
-#shadow_offset = 1 2
-#shadow_range = 10
-#shadow_render_power = 5
-#col.shadow = 0x66404040
+  #shadow_ignore_window = true
+  #shadow_offset = 1 2
+  #shadow_range = 10
+  #shadow_render_power = 5
+  #col.shadow = 0x66404040
   drop_shadow = true
     shadow_range = 20
     shadow_render_power = 3
@@ -112,7 +111,7 @@ decoration {
     blurls = gtk-layer-shell
     blurls = waybar
     blurls = lockscreen
-}
+  }
 
 
 
@@ -128,35 +127,6 @@ animations {
     animation = fade, 1, 7, overshot,
               animation = workspaces, 1, 7, overshot, slide
 }
-
-# # ▄▀█ █▄░█ █ █▀▄▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█
-# # █▀█ █░▀█ █ █░▀░█ █▀█ ░█░ █ █▄█ █░▀█
-# animations {
-#   enabled = true
-#
-#   # █▄▄ █▀▀ ▀█ █ █▀▀ █▀█   █▀▀ █░█ █▀█ █░█ █▀▀
-#   # █▄█ ██▄ █▄ █ ██▄ █▀▄   █▄▄ █▄█ █▀▄ ▀▄▀ ██▄
-#   bezier = wind, 0.05, 0.9, 0.1, 1.05
-#   bezier = winIn, 0.1, 1.1, 0.1, 1.1
-#   bezier = winOut, 0.3, -0.3, 0, 1
-#   bezier = liner, 1, 1, 1, 1
-#
-#
-#   #▄▀█ █▄░█ █ █▀▄▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█
-#   #█▀█ █░▀█ █ █░▀░█ █▀█ ░█░ █ █▄█ █░▀█
-#   animation = windows, 1, 6, wind, slide
-#   animation = windowsIn, 1, 6, winIn, slide
-#   animation = windowsOut, 1, 5, winOut, slide
-#   animation = windowsMove, 1, 5, wind, slide
-#   animation = border, 1, 1, liner
-#   animation = borderangle, 1, 30, liner, loop
-#   animation = fade, 1, 10, default
-#   animation = workspaces, 1, 5, wind
-# }
-
-# █░░ ▄▀█ █▄█ █▀█ █░█ ▀█▀ █▀
-# █▄▄ █▀█ ░█░ █▄█ █▄█ ░█░ ▄█
-
 dwindle {
   no_gaps_when_only = false
     pseudotile = true # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
@@ -172,21 +142,7 @@ gestures {
 # See https://wiki.hyprland.org/Configuring/Variables/ for more
   workspace_swipe = on
 }
-# animations {
-#     enabled = yes
-#
-#     # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-#
-#     bezier = myBezier, 0.05, 0.9, 0.1, 1.05
-#
-#     animation = windows, 1, 7, myBezier
-#     animation = windowsOut, 1, 7, default, popin 80%
-#     animation = border, 1, 10, default
-#     animation = borderangle, 1, 8, default
-#     animation = fade, 1, 7, default
-#     animation = workspaces, 1, 6, default
-# }
-#
+
 # Example per-device config
 # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
 device:corsair-corsair-katar-pro-gaming-mouse {
@@ -219,7 +175,6 @@ bind= $mainMod, F, fullscreen
 bind = $mainMod, space, togglefloating
 bind = $mainMod SHIFT, l, exec, swaylock
 bind = $mainMod, V, exec, clipman pick -t rofi
-# bind = $mainMod, W, exec, /home/debxd/.config/hypr/wallpaper.sh
 
 # # Move focus with mainMod + arrow keys
 bind = $mainMod, h, movefocus, l
@@ -274,8 +229,6 @@ bind =, XF86MonBrightnessDown, exec, brightnessctl s 5%-
 bind =, XF86MonBrightnessUp, exec, brightnessctl s 5%+ # Fullscreen bind = $mainMod, F, fullscreen swaylock bind = $mainMod SHIFT, L, exec, swaylock
 
 
-# Screenshot a window
-#[ -d newdir ] && echo "Directory Exists" || mkdir newdir
 
 
 # screenshot
@@ -285,8 +238,8 @@ bind = SHIFT, Print, exec, grim -g "$(slurp)" - | wl-copy && wl-paste > ~/Pictur
 bind =, Print, exec, grim - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify "Screenshot of whole screen taken" -t 1000
 
 # Screen Recording
-bind = $mainMod, R, exec,  wf-recorder --audio=alsa_output.pci-0000_05_00.6.analog-stereo.monitor --file="~/ScreenRecord-$(date).mp4"
-bind = $mainMod, C, exec, pkill wf-recorder
+#bind = $mainMod, R, exec,  wf-recorder --audio=alsa_output.pci-0000_05_00.6.analog-stereo.monitor --file="~/ScreenRecord-$(date).mp4"
+#bind = $mainMod, C, exec, pkill wf-recorder
 misc {
     disable_hyprland_logo = true
     disable_splash_rendering = false
@@ -297,15 +250,15 @@ windowrulev2 = noanim,class:^(xwaylandvideobridge)$
 windowrulev2 = nofocus,class:^(xwaylandvideobridge)$
 windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
 
-windowrule = opacity 1.0 override 0.9 override,^(kitty)$ # set opacity to 1.0 active and 0.5 inactive for kitty
+#windowrule = opacity 1.0 override 0.9 override,^(kitty)$ # set opacity to 1.0 active and 0.5 inactive for kitty
 
+# NVIDIA Stuff
  env = WLR_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1
 
  env = LIBVA_DRIVER_NAME,nvidia
  env = XDG_SESSION_TYPE,wayland
  env = __GLX_VENDOR_LIBRARY_NAME,nvidia
  env = WLR_NO_HARDWARE_CURSORS,1
-    '';
-
+ '';
   };
 }
