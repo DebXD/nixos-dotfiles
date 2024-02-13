@@ -13,10 +13,9 @@ monitor=eDP-1,1920x1080,auto,1
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
 # Execute your favorite apps at launch
-exec-once = waybar & hyprpaper & swaync & nm-applet
+exec-once = hyprpaper & swaync & nm-applet
 exec-once = wl-paste -t text --watch clipman store --no-persist
 exec-once = swayidle -w timeout 600 'swaylock -f' timeout 660 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
-
 
 
 # Some default env vars.
@@ -166,6 +165,10 @@ $mainMod = ALT
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 bind = $mainMod, Return, exec, kitty
 # bind = $mainMod, K, exec, /home/debxd/.config/hypr/wall.sh
+
+# Toggle control center
+bind = $mainMod SHIFT, N, exec, swaync-client -t -sw
+
 
 bind = $mainMod SHIFT, Q, killactive
 bind = $mainMod, D, exec, rofi -show drun

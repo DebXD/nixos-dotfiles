@@ -1,12 +1,9 @@
 { pkgs, lib, config, ... }:
 
 {
- xdg.configFile."hypr/paper".source = ./hyprpaper;
+ xdg.configFile."hypr/hyprpaper".source = ./hyprpaper;
           xdg.configFile."hypr/hyprpaper.conf".text = ''
-            preload = ~/.config/hypr/paper/animeBike.png
-            ipc = off
+            preload = /home/debxd/.config/hypr/hyprpaper/animeBike.png
+            wallpaper = eDP-1, /home/debxd/.config/hypr/hyprpaper/animeBike.png
           '';
-          xdg.configFile = {
-            "hypr/paper/wallpaper2.jpg".source = ./hyprpaper/animeBike.png;
-          };
 }
