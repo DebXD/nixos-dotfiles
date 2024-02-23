@@ -9,17 +9,17 @@
      ./hardware-configuration.nix
       #Nvidia
       ./system/nvidia.nix
-    ]; # Use the systemd-boot EFI boot loader.
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
+    ];
 
-nix.settings.experimental-features = ["nix-command" "flakes"];
+    nix.settings.experimental-features = ["nix-command" "flakes"];
+
 nixpkgs.config.allowUnfree = true;
 
   boot.initrd.kernelModules = [ "amdgpu" ];
+boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub = {
   enable = true;
-  device = "nodev";
+  devices = [ "nodev" ];
   efiSupport = true;
   configurationLimit = 5;
   };
@@ -94,7 +94,7 @@ services.upower.enable= true;
   # $ nix search wget
    environment.systemPackages = with pkgs;  [
      vim
-     neovim-unwrapped
+     neovim
      kitty
      firefox-wayland
      brightnessctl
@@ -102,12 +102,11 @@ services.upower.enable= true;
      git
      btop
      htop
-     pipewire
      webcord
      rofi-wayland
      cava
      wget
-     swaylock
+     swaylock-effects
      pywal
      neovide
      hyprpaper
@@ -128,8 +127,6 @@ services.upower.enable= true;
      lf
      cinnamon.nemo-with-extensions
      material-icons
-     vimPlugins.packer-nvim
-     vimPlugins.vim-packer
      luajit
      rustup
      gcc
@@ -164,7 +161,18 @@ services.upower.enable= true;
      protonup-qt
      jdk17
      networkmanagerapplet
+     wofi
+     nwg-look
+     sway-audio-idle-inhibit
+     xdg-desktop-portal
+     xdg-desktop-portal-wlr
+     xdg-desktop-portal-hyprland
+     xdg-desktop-portal-gtk
+     font-awesome
+     font-awesome_5
+     font-awesome_4
      ];
+
 #steam
 programs.steam = {
   enable = true;
@@ -195,6 +203,7 @@ programs.steam = {
    noto-fonts
    noto-fonts-cjk
    noto-fonts-emoji
+   powerline-fonts
   (nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; })
 ];
    # Neovim
